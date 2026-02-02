@@ -1,0 +1,114 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/scene_door.gd" id="1_door"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
+size = Vector2(160, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_v"]
+size = Vector2(8, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(24, 8)
+
+[node name="Distillery" type="Node2D"]
+
+[node name="Floor" type="Polygon2D" parent="."]
+color = Color(0.18, 0.14, 0.12, 1)
+polygon = PackedVector2Array(-80, -56, 80, -56, 80, 56, -80, 56)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, -56)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/TopWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="Visual" type="Polygon2D" parent="Walls/TopWall"]
+color = Color(0.35, 0.25, 0.18, 1)
+polygon = PackedVector2Array(-80, -4, 80, -4, 80, 4, -80, 4)
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 56)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/BottomWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="Visual" type="Polygon2D" parent="Walls/BottomWall"]
+color = Color(0.35, 0.25, 0.18, 1)
+polygon = PackedVector2Array(-80, -4, 80, -4, 80, 4, -80, 4)
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-80, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Visual" type="Polygon2D" parent="Walls/LeftWall"]
+color = Color(0.35, 0.25, 0.18, 1)
+polygon = PackedVector2Array(-4, -56, 4, -56, 4, 56, -4, 56)
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(80, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Visual" type="Polygon2D" parent="Walls/RightWall"]
+color = Color(0.35, 0.25, 0.18, 1)
+polygon = PackedVector2Array(-4, -56, 4, -56, 4, 56, -4, 56)
+
+[node name="PotStill" type="Node2D" parent="."]
+position = Vector2(-40, -20)
+
+[node name="Visual" type="Polygon2D" parent="PotStill"]
+color = Color(0.72, 0.45, 0.2, 1)
+polygon = PackedVector2Array(-10, -12, 10, -12, 10, 12, -10, 12)
+
+[node name="Label" type="Polygon2D" parent="PotStill"]
+color = Color(0.55, 0.35, 0.15, 1)
+polygon = PackedVector2Array(-4, -16, 4, -16, 4, -12, -4, -12)
+
+[node name="Barrels" type="Node2D" parent="."]
+position = Vector2(40, -20)
+
+[node name="Barrel1" type="Polygon2D" parent="Barrels"]
+color = Color(0.5, 0.3, 0.15, 1)
+polygon = PackedVector2Array(-6, -8, 6, -8, 6, 8, -6, 8)
+
+[node name="Barrel2" type="Polygon2D" parent="Barrels"]
+position = Vector2(16, 0)
+color = Color(0.45, 0.28, 0.12, 1)
+polygon = PackedVector2Array(-6, -8, 6, -8, 6, 8, -6, 8)
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2(0, 52)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_door")
+target_scene = "res://scenes/world/outside.tscn"
+target_spawn = "from_distillery"
+
+[node name="Shape" type="CollisionShape2D" parent="Door"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Visual" type="Polygon2D" parent="Door"]
+color = Color(0.3, 0.6, 0.3, 1)
+polygon = PackedVector2Array(-12, -4, 12, -4, 12, 4, -12, 4)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 20)
+
+[node name="from_outside" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 40)

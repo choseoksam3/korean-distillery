@@ -1,0 +1,122 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/scene_door.gd" id="1_door"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_border_h"]
+size = Vector2(320, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_border_v"]
+size = Vector2(8, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(20, 10)
+
+[node name="Outside" type="Node2D"]
+
+[node name="Ground" type="Polygon2D" parent="."]
+color = Color(0.22, 0.38, 0.18, 1)
+polygon = PackedVector2Array(-160, -96, 160, -96, 160, 96, -160, 96)
+
+[node name="Path" type="Polygon2D" parent="."]
+color = Color(0.45, 0.38, 0.28, 1)
+polygon = PackedVector2Array(-10, -50, 10, -50, 10, 96, -10, 96)
+
+[node name="DistilleryBuilding" type="Node2D" parent="."]
+position = Vector2(0, -60)
+
+[node name="Visual" type="Polygon2D" parent="DistilleryBuilding"]
+color = Color(0.35, 0.25, 0.18, 1)
+polygon = PackedVector2Array(-40, -20, 40, -20, 40, 10, -40, 10)
+
+[node name="Roof" type="Polygon2D" parent="DistilleryBuilding"]
+color = Color(0.55, 0.2, 0.15, 1)
+polygon = PackedVector2Array(-44, -20, 0, -35, 44, -20)
+
+[node name="Door" type="Area2D" parent="DistilleryBuilding"]
+position = Vector2(0, 10)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_door")
+target_scene = "res://scenes/world/distillery.tscn"
+target_spawn = "from_outside"
+
+[node name="Shape" type="CollisionShape2D" parent="DistilleryBuilding/Door"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Visual" type="Polygon2D" parent="DistilleryBuilding/Door"]
+color = Color(0.3, 0.6, 0.3, 1)
+polygon = PackedVector2Array(-10, -5, 10, -5, 10, 5, -10, 5)
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="Top" type="StaticBody2D" parent="Borders"]
+position = Vector2(0, -96)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/Top"]
+shape = SubResource("RectangleShape2D_border_h")
+
+[node name="Bottom" type="StaticBody2D" parent="Borders"]
+position = Vector2(0, 96)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/Bottom"]
+shape = SubResource("RectangleShape2D_border_h")
+
+[node name="Left" type="StaticBody2D" parent="Borders"]
+position = Vector2(-160, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/Left"]
+shape = SubResource("RectangleShape2D_border_v")
+
+[node name="Right" type="StaticBody2D" parent="Borders"]
+position = Vector2(160, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/Right"]
+shape = SubResource("RectangleShape2D_border_v")
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree1" type="Polygon2D" parent="Trees"]
+position = Vector2(-80, -30)
+color = Color(0.15, 0.45, 0.12, 1)
+polygon = PackedVector2Array(-8, -12, 0, -20, 8, -12, 6, 0, -6, 0)
+
+[node name="Trunk1" type="Polygon2D" parent="Trees"]
+position = Vector2(-80, -30)
+color = Color(0.4, 0.25, 0.12, 1)
+polygon = PackedVector2Array(-2, 0, 2, 0, 2, 8, -2, 8)
+
+[node name="Tree2" type="Polygon2D" parent="Trees"]
+position = Vector2(90, 10)
+color = Color(0.12, 0.42, 0.1, 1)
+polygon = PackedVector2Array(-8, -12, 0, -20, 8, -12, 6, 0, -6, 0)
+
+[node name="Trunk2" type="Polygon2D" parent="Trees"]
+position = Vector2(90, 10)
+color = Color(0.4, 0.25, 0.12, 1)
+polygon = PackedVector2Array(-2, 0, 2, 0, 2, 8, -2, 8)
+
+[node name="Tree3" type="Polygon2D" parent="Trees"]
+position = Vector2(-100, 50)
+color = Color(0.18, 0.48, 0.14, 1)
+polygon = PackedVector2Array(-8, -12, 0, -20, 8, -12, 6, 0, -6, 0)
+
+[node name="Trunk3" type="Polygon2D" parent="Trees"]
+position = Vector2(-100, 50)
+color = Color(0.4, 0.25, 0.12, 1)
+polygon = PackedVector2Array(-2, 0, 2, 0, 2, 8, -2, 8)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 0)
+
+[node name="from_distillery" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, -40)
