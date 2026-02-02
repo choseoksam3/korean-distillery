@@ -1,0 +1,50 @@
+{
+	"barley": {
+		"name": "보리",
+		"type": "material",
+		"icon_color": [0.85, 0.75, 0.35],
+		"description": "위스키의 기본 원료"
+	},
+	"water": {
+		"name": "물",
+		"type": "material",
+		"icon_color": [0.4, 0.65, 0.9],
+		"description": "깨끗한 수원에서 가져온 물"
+	},
+	"yeast_ale": {
+		"name": "에일 효모",
+		"type": "material",
+		"icon_color": [0.9, 0.8, 0.5],
+		"description": "과일향과 달콤한 풍미를 만드는 효모"
+	},
+	"yeast_wine": {
+		"name": "와인 효모",
+		"type": "material",
+		"icon_color": [0.75, 0.5, 0.65],
+		"description": "꽃향과 과일풍미를 만드는 효모"
+	},
+	"yeast_wild": {
+		"name": "야생 효모",
+		"type": "material",
+		"icon_color": [0.6, 0.7, 0.45],
+		"description": "스파이시하고 복합적인 풍미의 효모"
+	},
+	"wort": {
+		"name": "맥아즙",
+		"type": "material",
+		"icon_color": [0.7, 0.55, 0.25],
+		"description": "매싱으로 추출한 당분 용액"
+	},
+	"wash": {
+		"name": "발효액",
+		"type": "material",
+		"icon_color": [0.55, 0.5, 0.3],
+		"description": "효모로 발효시킨 알코올 용액"
+	},
+	"new_make_spirit": {
+		"name": "증류원액",
+		"type": "material",
+		"icon_color": [0.85, 0.85, 0.9],
+		"description": "갓 증류한 투명한 원액"
+	}
+}

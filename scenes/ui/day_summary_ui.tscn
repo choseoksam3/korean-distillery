@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/day_summary_ui.gd" id="1_summary"]
+
+[node name="DaySummaryUI" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_summary")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -70.0
+offset_right = 90.0
+offset_bottom = 70.0
+
+[node name="Content" type="VBoxContainer" parent="Panel"]
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 174.0
+offset_bottom = 120.0
+
+[node name="CloseHint" type="Label" parent="Panel"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -14.0
+offset_right = -4.0
+offset_bottom = -2.0
+horizontal_alignment = 2
+text = "[E] 확인"

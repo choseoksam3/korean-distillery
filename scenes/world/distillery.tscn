@@ -1,6 +1,11 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/scene_door.gd" id="1_door"]
+[ext_resource type="Script" path="res://scripts/brewing/mash_tun.gd" id="2_mash"]
+[ext_resource type="Script" path="res://scripts/brewing/fermenter.gd" id="3_ferm"]
+[ext_resource type="Script" path="res://scripts/brewing/pot_still.gd" id="4_still"]
+[ext_resource type="Script" path="res://scripts/brewing/barrel_rack.gd" id="5_barrel"]
+[ext_resource type="Script" path="res://scripts/brewing/bottling_station.gd" id="6_bottle"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
 size = Vector2(160, 8)
@@ -10,6 +15,9 @@ size = Vector2(8, 112)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
 size = Vector2(24, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_station"]
+radius = 18.0
 
 [node name="Distillery" type="Node2D"]
 
@@ -67,28 +75,144 @@ shape = SubResource("RectangleShape2D_wall_v")
 color = Color(0.35, 0.25, 0.18, 1)
 polygon = PackedVector2Array(-4, -56, 4, -56, 4, 56, -4, 56)
 
-[node name="PotStill" type="Node2D" parent="."]
-position = Vector2(-40, -20)
+[node name="MashTun" type="Area2D" parent="."]
+position = Vector2(-50, -20)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("2_mash")
+
+[node name="Shape" type="CollisionShape2D" parent="MashTun"]
+shape = SubResource("CircleShape2D_station")
+
+[node name="Visual" type="Polygon2D" parent="MashTun"]
+color = Color(0.6, 0.5, 0.25, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="StatusIndicator" type="Polygon2D" parent="MashTun"]
+position = Vector2(0, -12)
+color = Color(0.4, 0.4, 0.4, 1)
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+
+[node name="Label" type="Label" parent="MashTun"]
+offset_left = -14.0
+offset_top = 10.0
+offset_right = 14.0
+offset_bottom = 22.0
+horizontal_alignment = 1
+text = "매싱"
+
+[node name="Fermenter" type="Area2D" parent="."]
+position = Vector2(-10, -20)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("3_ferm")
+
+[node name="Shape" type="CollisionShape2D" parent="Fermenter"]
+shape = SubResource("CircleShape2D_station")
+
+[node name="Visual" type="Polygon2D" parent="Fermenter"]
+color = Color(0.4, 0.55, 0.3, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="StatusIndicator" type="Polygon2D" parent="Fermenter"]
+position = Vector2(0, -12)
+color = Color(0.4, 0.4, 0.4, 1)
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+
+[node name="Label" type="Label" parent="Fermenter"]
+offset_left = -14.0
+offset_top = 10.0
+offset_right = 14.0
+offset_bottom = 22.0
+horizontal_alignment = 1
+text = "발효"
+
+[node name="PotStill" type="Area2D" parent="."]
+position = Vector2(-40, 20)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("4_still")
+
+[node name="Shape" type="CollisionShape2D" parent="PotStill"]
+shape = SubResource("CircleShape2D_station")
 
 [node name="Visual" type="Polygon2D" parent="PotStill"]
 color = Color(0.72, 0.45, 0.2, 1)
 polygon = PackedVector2Array(-10, -12, 10, -12, 10, 12, -10, 12)
 
-[node name="Label" type="Polygon2D" parent="PotStill"]
+[node name="Neck" type="Polygon2D" parent="PotStill"]
 color = Color(0.55, 0.35, 0.15, 1)
 polygon = PackedVector2Array(-4, -16, 4, -16, 4, -12, -4, -12)
 
-[node name="Barrels" type="Node2D" parent="."]
-position = Vector2(40, -20)
+[node name="StatusIndicator" type="Polygon2D" parent="PotStill"]
+position = Vector2(0, -18)
+color = Color(0.4, 0.4, 0.4, 1)
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 
-[node name="Barrel1" type="Polygon2D" parent="Barrels"]
+[node name="Label" type="Label" parent="PotStill"]
+offset_left = -14.0
+offset_top = 12.0
+offset_right = 14.0
+offset_bottom = 24.0
+horizontal_alignment = 1
+text = "증류"
+
+[node name="BarrelRack" type="Area2D" parent="."]
+position = Vector2(40, -20)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("5_barrel")
+
+[node name="Shape" type="CollisionShape2D" parent="BarrelRack"]
+shape = SubResource("CircleShape2D_station")
+
+[node name="Visual" type="Polygon2D" parent="BarrelRack"]
 color = Color(0.5, 0.3, 0.15, 1)
 polygon = PackedVector2Array(-6, -8, 6, -8, 6, 8, -6, 8)
 
-[node name="Barrel2" type="Polygon2D" parent="Barrels"]
-position = Vector2(16, 0)
+[node name="Barrel2" type="Polygon2D" parent="BarrelRack"]
+position = Vector2(14, 0)
 color = Color(0.45, 0.28, 0.12, 1)
 polygon = PackedVector2Array(-6, -8, 6, -8, 6, 8, -6, 8)
+
+[node name="StatusIndicator" type="Polygon2D" parent="BarrelRack"]
+position = Vector2(4, -10)
+color = Color(0.4, 0.4, 0.4, 1)
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+
+[node name="Label" type="Label" parent="BarrelRack"]
+offset_left = -10.0
+offset_top = 10.0
+offset_right = 18.0
+offset_bottom = 22.0
+horizontal_alignment = 1
+text = "숙성"
+
+[node name="BottlingStation" type="Area2D" parent="."]
+position = Vector2(40, 20)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("6_bottle")
+
+[node name="Shape" type="CollisionShape2D" parent="BottlingStation"]
+shape = SubResource("CircleShape2D_station")
+
+[node name="Visual" type="Polygon2D" parent="BottlingStation"]
+color = Color(0.35, 0.55, 0.45, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="StatusIndicator" type="Polygon2D" parent="BottlingStation"]
+position = Vector2(0, -12)
+color = Color(0.4, 0.4, 0.4, 1)
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+
+[node name="Label" type="Label" parent="BottlingStation"]
+offset_left = -14.0
+offset_top = 10.0
+offset_right = 14.0
+offset_bottom = 22.0
+horizontal_alignment = 1
+text = "병입"
 
 [node name="Door" type="Area2D" parent="."]
 position = Vector2(0, 52)

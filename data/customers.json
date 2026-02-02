@@ -1,0 +1,7 @@
+[
+  {"id": "casual", "name": "일반 손님", "min_quality": 0.0, "min_age": 0, "patience": 1.0, "tip_mult": 1.0, "color": [0.6, 0.6, 0.8]},
+  {"id": "connoisseur", "name": "감정가", "min_quality": 0.5, "min_age": 24, "patience": 0.5, "tip_mult": 2.0, "color": [0.8, 0.6, 0.3]},
+  {"id": "tourist", "name": "관광객", "min_quality": 0.0, "min_age": 0, "patience": 0.8, "tip_mult": 1.5, "color": [0.3, 0.8, 0.3]},
+  {"id": "critic", "name": "평론가", "min_quality": 0.7, "min_age": 36, "patience": 0.3, "tip_mult": 3.0, "color": [0.8, 0.3, 0.3]},
+  {"id": "regular", "name": "단골", "min_quality": 0.3, "min_age": 12, "patience": 0.9, "tip_mult": 1.2, "color": [0.5, 0.7, 0.5]}
+]

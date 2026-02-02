@@ -14,6 +14,10 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if GameManager.is_paused:
+		velocity = Vector2.ZERO
+		return
+
 	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * SPEED
 
@@ -24,9 +28,13 @@ func _physics_process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if GameManager.is_paused:
+		return
 	if event.is_action_pressed("interact") and nearest_interactable:
 		if nearest_interactable.has_method("interact"):
 			nearest_interactable.interact()
+	if event.is_action_pressed("advance_time"):
+		GameManager.advance_phase()
 
 
 func _update_facing(direction: Vector2) -> void:

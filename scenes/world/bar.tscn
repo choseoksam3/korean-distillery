@@ -1,0 +1,165 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/scene_door.gd" id="1_door"]
+[ext_resource type="Script" path="res://scripts/bar/bar_manager.gd" id="2_barmgr"]
+[ext_resource type="Script" path="res://scripts/bar/serving_station.gd" id="3_serve"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
+size = Vector2(160, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_v"]
+size = Vector2(8, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(24, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_counter"]
+size = Vector2(140, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_serving"]
+radius = 14.0
+
+[node name="Bar" type="Node2D"]
+
+[node name="BarManager" type="Node" parent="."]
+script = ExtResource("2_barmgr")
+
+[node name="Floor" type="Polygon2D" parent="."]
+color = Color(0.15, 0.12, 0.18, 1)
+polygon = PackedVector2Array(-80, -56, 80, -56, 80, 56, -80, 56)
+
+[node name="CounterTop" type="Polygon2D" parent="."]
+color = Color(0.35, 0.22, 0.12, 1)
+polygon = PackedVector2Array(-70, 7, 70, 7, 70, 13, -70, 13)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, -56)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/TopWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="Visual" type="Polygon2D" parent="Walls/TopWall"]
+color = Color(0.25, 0.18, 0.28, 1)
+polygon = PackedVector2Array(-80, -4, 80, -4, 80, 4, -80, 4)
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 56)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/BottomWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="Visual" type="Polygon2D" parent="Walls/BottomWall"]
+color = Color(0.25, 0.18, 0.28, 1)
+polygon = PackedVector2Array(-80, -4, 80, -4, 80, 4, -80, 4)
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-80, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Visual" type="Polygon2D" parent="Walls/LeftWall"]
+color = Color(0.25, 0.18, 0.28, 1)
+polygon = PackedVector2Array(-4, -56, 4, -56, 4, 56, -4, 56)
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(80, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Visual" type="Polygon2D" parent="Walls/RightWall"]
+color = Color(0.25, 0.18, 0.28, 1)
+polygon = PackedVector2Array(-4, -56, 4, -56, 4, 56, -4, 56)
+
+[node name="Counter" type="StaticBody2D" parent="."]
+position = Vector2(0, 10)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Counter"]
+shape = SubResource("RectangleShape2D_counter")
+
+[node name="Seats" type="Node2D" parent="."]
+
+[node name="Seat0" type="Marker2D" parent="Seats"]
+position = Vector2(-40, -20)
+
+[node name="Visual" type="Polygon2D" parent="Seats/Seat0"]
+color = Color(0.3, 0.2, 0.15, 0.5)
+polygon = PackedVector2Array(-5, -3, 5, -3, 5, 3, -5, 3)
+
+[node name="Seat1" type="Marker2D" parent="Seats"]
+position = Vector2(-15, -20)
+
+[node name="Visual" type="Polygon2D" parent="Seats/Seat1"]
+color = Color(0.3, 0.2, 0.15, 0.5)
+polygon = PackedVector2Array(-5, -3, 5, -3, 5, 3, -5, 3)
+
+[node name="Seat2" type="Marker2D" parent="Seats"]
+position = Vector2(10, -20)
+
+[node name="Visual" type="Polygon2D" parent="Seats/Seat2"]
+color = Color(0.3, 0.2, 0.15, 0.5)
+polygon = PackedVector2Array(-5, -3, 5, -3, 5, 3, -5, 3)
+
+[node name="Seat3" type="Marker2D" parent="Seats"]
+position = Vector2(35, -20)
+
+[node name="Visual" type="Polygon2D" parent="Seats/Seat3"]
+color = Color(0.3, 0.2, 0.15, 0.5)
+polygon = PackedVector2Array(-5, -3, 5, -3, 5, 3, -5, 3)
+
+[node name="ServingStation" type="Area2D" parent="."]
+position = Vector2(0, 20)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("3_serve")
+
+[node name="Shape" type="CollisionShape2D" parent="ServingStation"]
+shape = SubResource("CircleShape2D_serving")
+
+[node name="Visual" type="Polygon2D" parent="ServingStation"]
+color = Color(0.5, 0.35, 0.2, 1)
+polygon = PackedVector2Array(-8, -6, 8, -6, 8, 6, -8, 6)
+
+[node name="Label" type="Label" parent="ServingStation"]
+offset_left = -14.0
+offset_top = 6.0
+offset_right = 14.0
+offset_bottom = 18.0
+horizontal_alignment = 1
+text = "서빙"
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2(0, 52)
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_door")
+target_scene = "res://scenes/world/outside.tscn"
+target_spawn = "from_bar"
+
+[node name="Shape" type="CollisionShape2D" parent="Door"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Visual" type="Polygon2D" parent="Door"]
+color = Color(0.3, 0.5, 0.6, 1)
+polygon = PackedVector2Array(-12, -4, 12, -4, 12, 4, -12, 4)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 30)
+
+[node name="from_outside" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 40)
